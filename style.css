@@ -1,0 +1,2498 @@
+/* ==========================================================================
+   ⚜️ 1. СИСТЕМНЫЕ ПЕРЕМЕННЫЕ, ШРИФТЫ И БАЗОВЫЕ НАСТРОЙКИ
+   ========================================================================== */
+
+:root {
+    /* Фирменная пудровая палитра: нежный жемчужно-розовый шелк */
+    --bg-silk-base: #fdf8f6; 
+    --bg-card-pure: rgba(255, 255, 255, 0.75); /* Матовая полупрозрачность для стеклянного эффекта */
+    --text-graphite: #2b252a; 
+    --text-neutral: #82787e;
+    
+    /* Дорогие акцентные бьюти-тона */
+    --luxury-dusty-rose: #d65885; /* Розовый лотос */
+    --luxury-deep-charcoal: #362d33; /* Графитовый черничный */
+    --luxury-muted-gold: #c2a372; /* Матовое приглушенное золото */
+    --border-invisible: rgba(54, 45, 51, 0.05);
+    
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Manrope', sans-serif;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body { 
+    background-color: var(--bg-silk-base); 
+    color: var(--text-graphite); 
+    font-family: var(--font-body); 
+    overflow-x: hidden; 
+    line-height: 1.6; 
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 24px; 
+}
+
+.font-cinzel { 
+    font-family: var(--font-heading); 
+}
+
+/* ==========================================================================
+   🌊 2. ГЕНЕРАТОР ЖЕМЧУЖНОГО АВРОРА-ГРАДИЕНТА (ЖИВОЙ ФОН)
+   ========================================================================== */
+
+.silk-gradient-canvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    background: var(--bg-silk-base);
+}
+
+.aurora-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px); /* Максимально мягкие, бесшовные переливы */
+    opacity: 0.65;
+    will-change: transform;
+}
+
+.orb--top-left {
+    top: -10%; left: -10%;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, #fceae3 0%, rgba(253, 248, 246, 0) 70%);
+}
+
+.orb--center-right {
+    top: 35%; right: -15%;
+    width: 55vw; height: 55vw;
+    background: radial-gradient(circle, #fadcde 0%, rgba(253, 248, 246, 0) 70%);
+}
+
+.orb--bottom-left {
+    bottom: -10%; left: -5%;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, #f5e4eb 0%, rgba(253, 248, 246, 0) 70%);
+}
+
+/* ==========================================================================
+   📥 3. ПАНЕЛЬ НАВИГАЦИИ С ОКРУГЛОЙ КНОПКОЙ СТАРТА
+   ========================================================================== */
+
+.header { 
+    padding: 18px 0; 
+    background-color: rgba(253, 248, 246, 0.75); 
+    backdrop-filter: blur(30px); 
+    -webkit-backdrop-filter: blur(30px);
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid rgba(54, 45, 51, 0.04); 
+    box-shadow: 0 4px 30px rgba(54, 45, 51, 0.02); 
+}
+
+.header__wrapper { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.logo { 
+    font-family: var(--font-heading); 
+    font-size: 24px; 
+    font-weight: 500; 
+    letter-spacing: 1px; 
+    color: var(--luxury-deep-charcoal); 
+}
+
+.logo span { 
+    color: var(--luxury-dusty-rose); 
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav__link { 
+    color: var(--text-neutral); 
+    text-decoration: none; 
+    margin: 0 20px; 
+    font-weight: 500; 
+    font-size: 14px; 
+    transition: color 0.3s, font-weight 0.3s; 
+}
+
+.nav__link:hover, .nav__link.active { 
+    color: var(--text-graphite); 
+    font-weight: 600; 
+}
+
+.btn-nav { 
+    border: 1px solid var(--luxury-deep-charcoal); 
+    padding: 12px 30px; 
+    border-radius: 50px; /* Полное скругление кнопки по вашему ТЗ */
+    color: var(--luxury-deep-charcoal); 
+    text-decoration: none; 
+    font-size: 13px; 
+    font-weight: 600; 
+    letter-spacing: 0.5px; 
+    background-color: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    box-shadow: 0 4px 15px rgba(54, 45, 51, 0.03); 
+}
+
+.btn-nav:hover { 
+    background: var(--luxury-deep-charcoal); 
+    color: #fff; 
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(54, 45, 51, 0.08);
+}
+/* ==========================================================================
+   ⚜️ 4. ГЛАВНЫЙ ЭКРАН (ПРЕМИУМ БАННЕР ШКОЛЫ)
+   ========================================================================== */
+
+.hero-premium-banner {
+    position: relative;
+    margin-top: 85px;
+    height: 560px;
+    background: transparent; 
+    display: flex;
+    align-items: center;
+}
+
+.banner-silk-overlay {
+    position: absolute;
+    top: 0; left: 10%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%);
+    transform: skewX(-22deg);
+    z-index: 1;
+}
+
+.hero-banner__wrapper { 
+    position: relative; 
+    z-index: 2; 
+    display: grid; 
+    grid-template-columns: 1.15fr 0.85fr; 
+    width: 100%; 
+    align-items: center; 
+}
+
+.luxury-title-frame { 
+    border-left: 2px solid var(--luxury-dusty-rose); 
+    padding-left: 25px; 
+    margin-bottom: 30px; 
+}
+
+.luxury-node { 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: var(--luxury-muted-gold); 
+    letter-spacing: 4px; 
+    display: block; 
+    margin-bottom: 5px; 
+}
+
+.luxury-main-title { 
+    font-family: var(--font-heading); 
+    font-size: 52px; 
+    font-weight: 400; 
+    line-height: 1.1; 
+    color: var(--luxury-deep-charcoal); 
+    letter-spacing: -1px;
+}
+
+.premium-subtitle { 
+    font-size: 18px; 
+    font-weight: 400; 
+    letter-spacing: 5px; 
+    color: var(--luxury-deep-charcoal); 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+}
+
+.premium-subtitle span { 
+    font-weight: 600; 
+    color: var(--luxury-dusty-rose); 
+}
+
+.btn-banner-prime { 
+    background: var(--luxury-deep-charcoal); 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 18px 40px; 
+    font-size: 13px; 
+    font-weight: 500; 
+    letter-spacing: 2px; 
+    display: inline-block; 
+    transition: background 0.3s;
+}
+
+.btn-banner-prime:hover { 
+    background: var(--luxury-dusty-rose); 
+}
+
+.hero-banner__visual { 
+    position: relative; 
+    height: 100%; 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+}
+
+.speaker-frame-minimal { 
+    width: 340px; 
+    height: 480px; 
+    position: relative; 
+    z-index: 2; 
+    margin-right: 40px; 
+    overflow: hidden;
+}
+
+.speaker-img-src {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.minimal-blur-glow { 
+    position: absolute; 
+    width: 200px; 
+    height: 200px; 
+    background: rgba(214, 88, 133, 0.12); 
+    filter: blur(40px); 
+    border-radius: 50%; 
+    top: 20%; left: 20%; 
+    z-index: -1; 
+}
+
+.luxury-lotus-seal { 
+    position: absolute; 
+    top: 15%; right: 0; 
+    z-index: 3; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    opacity: 0.9; 
+}
+
+.seal-icon { 
+    font-size: 52px; 
+    line-height: 1; 
+    margin-bottom: 12px; 
+}
+
+.seal-text { 
+    display: flex; 
+    flex-direction: column; 
+    color: var(--luxury-deep-charcoal); 
+}
+
+.seal-brand { 
+    font-size: 13px; 
+    font-weight: 500; 
+    letter-spacing: 5px; 
+}
+
+.seal-sub { 
+    font-size: 12px; 
+    font-weight: 400; 
+    letter-spacing: 4px; 
+    margin-top: 3px; 
+    border-top: 1px solid var(--luxury-deep-charcoal); 
+    padding-top: 3px; 
+}
+
+/* ==========================================================================
+   🛍️ 5. СЕТКА И ЖЕСТКИЕ РАМКИ КАРТОЧЕК УСЛУГ (ПОД ТЕГ IMG)
+   ========================================================================== */
+
+.streams-section { 
+    padding: 120px 0; 
+    border-top: 1px solid var(--border-invisible); 
+}
+
+.section-title { 
+    text-align: center; 
+    margin-bottom: 80px; 
+}
+
+.section-tag { 
+    color: var(--luxury-muted-gold); 
+    font-size: 12px; 
+    font-weight: 500; 
+    letter-spacing: 3px; 
+    display: block; 
+    margin-bottom: 12px; 
+}
+
+.section-title h2 { 
+    font-family: var(--font-heading); 
+    font-size: 38px; 
+    color: var(--luxury-deep-charcoal); 
+    margin-bottom: 15px; 
+    font-weight: 400; 
+}
+
+.section-title p { 
+    color: var(--text-neutral); 
+    max-width: 600px; 
+    margin: 0 auto; 
+    font-size: 15px; 
+}
+
+/* Сетка на главной (5 штук в ряд) */
+.products-grid-five { 
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px 16px; 
+}
+
+/* Сетка в каталоге (14 штук, 4 в ряд) */
+.products-grid-four { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 35px 24px; 
+}
+
+/* Базовый закрытый бокс карточки-услуги */
+.product-capsule { 
+    display: flex; 
+    flex-direction: column; 
+    background: #ffffff;
+    border: 1px solid rgba(54, 45, 51, 0.06);
+    padding: 12px;
+    cursor: pointer; 
+    box-shadow: 0 4px 20px rgba(54, 45, 51, 0.01);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Рамка-объектив для картинки (фиксация размеров) */
+.capsule-lens { 
+    position: relative; 
+    width: 100%;
+    height: 275px; /* Фиксированная высота предотвращает съезжание текста */
+    background-color: #f7f3ee;
+    overflow: hidden; 
+    transition: all 0.3s ease; 
+}
+
+/* Управление поведением тега img */
+.product-img-tag { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Изображение заполняет бокс без искажений пропорций */
+    object-position: center; 
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+
+.product-info-overlay { 
+    position: absolute; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(54, 45, 51, 0.35); 
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    transition: opacity 0.3s; 
+}
+
+.product-info-overlay span { 
+    font-size: 11px; 
+    color: #fff; 
+    font-weight: 600; 
+    letter-spacing: 2px; 
+    border: 1px solid rgba(255, 255, 255, 0.7); 
+    padding: 10px 22px; 
+}
+
+/* Стили заголовков под рамкой */
+.product-title { 
+    font-size: 13px; 
+    font-weight: 500; 
+    color: var(--luxury-deep-charcoal); 
+    margin-top: 16px; 
+    margin-bottom: 6px;
+    text-align: center; 
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+}
+
+/* Эффекты при наведении (Hover) */
+.product-capsule:hover {
+    border-color: var(--luxury-dusty-rose);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(54, 45, 51, 0.04);
+}
+.product-capsule:hover .product-img-tag { transform: scale(1.03); }
+.product-capsule:hover .product-info-overlay { opacity: 1; }
+.product-capsule:hover .product-title { color: var(--luxury-dusty-rose); }
+/* ==========================================================================
+   💳 6. СЕКЦИЯ ТАРИФОВ И ЮРИДИЧЕСКИХ КОНТАКТОВ
+   ========================================================================== */
+
+.prices-section { 
+    padding: 120px 0; 
+    background: transparent; 
+    border-top: 1px solid var(--border-invisible); 
+}
+
+.prices-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px; 
+}
+
+.price-card { 
+    background: var(--bg-card-pure); 
+    border: 1px solid var(--border-invisible); 
+    padding: 60px 50px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.3s; 
+    box-shadow: 0 10px 40px rgba(54, 45, 51, 0.02); 
+}
+
+.price-card:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 30px 60px rgba(54, 45, 51, 0.05); 
+    border-color: var(--luxury-dusty-rose); 
+    background: rgba(255, 255, 255, 0.9); 
+}
+
+.price-card--featured { 
+    border: 1px solid var(--luxury-muted-gold); 
+    background: rgba(255, 255, 255, 0.8); 
+}
+
+.card-badge { 
+    font-size: 11px; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    color: var(--luxury-dusty-rose); 
+    letter-spacing: 1.5px; 
+    margin-bottom: 15px; 
+    display: block; 
+}
+
+.price-card h3 { 
+    font-family: var(--font-heading); 
+    font-size: 24px; 
+    color: var(--luxury-deep-charcoal); 
+    margin-bottom: 15px; 
+    font-weight: 400; 
+}
+
+.price-card__desc { 
+    color: var(--text-neutral); 
+    font-size: 15px; 
+    margin-bottom: 45px; 
+}
+
+.price-card__value { 
+    font-family: var(--font-heading); 
+    font-size: 44px; 
+    font-weight: 500; 
+    color: var(--text-graphite); 
+    margin-bottom: 40px; 
+}
+
+.price-card__value span { 
+    font-size: 24px; 
+    font-weight: 400; 
+    color: var(--text-neutral); 
+}
+
+.btn-pay { 
+    width: 100%; 
+    background: transparent; 
+    border: 1px solid var(--luxury-deep-charcoal); 
+    color: var(--luxury-deep-charcoal); 
+    padding: 18px; 
+    font-size: 13px; 
+    font-weight: 600; 
+    letter-spacing: 1px; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+}
+
+.btn-pay:hover { 
+    background: var(--luxury-deep-charcoal); 
+    color: #fff; 
+}
+
+.btn-pay--featured { 
+    background: var(--luxury-deep-charcoal); 
+    border-color: var(--luxury-deep-charcoal); 
+    color: #fff; 
+}
+
+.btn-pay--featured:hover { 
+    background: var(--luxury-dusty-rose); 
+    border-color: var(--luxury-dusty-rose); 
+}
+
+/* Юридический блок контактов (ФЗ РФ) */
+.contacts-grid-layout { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px; 
+    background: #ffffff; 
+    padding: 45px; 
+    border: 1px solid var(--border-invisible); 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.01);
+}
+
+.contact-info-block h4 { 
+    font-size: 15px; 
+    margin-bottom: 20px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    color: var(--luxury-deep-charcoal); 
+}
+
+.contact-line { 
+    font-size: 15px; 
+    margin-bottom: 12px; 
+    color: var(--text-neutral); 
+}
+
+.contact-line a { 
+    color: var(--luxury-dusty-rose); 
+    text-decoration: none; 
+    font-weight: 600;
+}
+
+.text-muted-legal {
+    border-left: 1px solid var(--border-invisible);
+    padding-left: 40px;
+}
+
+/* ==========================================================================
+   💬 7. СТЕНА ОТЗЫВОВ И МНОГОСТРАНИЧНЫЕ МОДУЛИ
+   ========================================================================== */
+
+.reviews-main-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    margin-bottom: 45px; 
+}
+
+.review-photo-item { 
+    border: 1px solid var(--border-invisible); 
+    background: #ffffff; 
+    padding: 10px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.01); 
+}
+
+.review-img-tag { 
+    width: 100%; 
+    height: 340px; 
+    object-fit: cover; 
+    object-position: center; 
+    transition: transform 0.4s ease; 
+}
+
+.review-photo-item:hover .review-img-tag { 
+    transform: scale(1.02); 
+}
+
+.reviews-action-footer { 
+    text-align: center; 
+}
+
+/* Сетки страниц полного каталога услуг и выделенной стены отзывов */
+.catalog-grid-full, .reviews-wall-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    margin-top: 60px; 
+    margin-bottom: 100px; 
+}
+
+.price-card-item { 
+    background: #ffffff; 
+    border: 1px solid var(--border-invisible); 
+    padding: 45px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    box-shadow: 0 10px 35px rgba(0,0,0,0.01);
+}
+
+.featured-border { 
+    border: 1px solid var(--luxury-muted-gold); 
+}
+
+.card-price-val { 
+    font-size: 32px; 
+    font-weight: 700; 
+    margin: 20px 0; 
+    color: var(--text-graphite);
+}
+
+.review-wall-card { 
+    border: 1px solid var(--border-invisible); 
+    background: #ffffff; 
+    padding: 12px; 
+}
+
+.review-wall-img { 
+    width: 100%; 
+    height: auto; 
+    object-fit: contain; 
+}
+/* ==========================================================================
+   🏛️ 8. МАТОВЫЕ МОДАЛЬНЫЕ ОКНА И ЗАКОННЫЕ COOKIES (ФЗ-152)
+   ========================================================================== */
+
+.luxury-modal { 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    z-index: 2000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.4s ease; 
+}
+
+.luxury-modal.active { 
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+.modal-overlay { 
+    position: absolute; 
+    width: 100%; height: 100%; 
+    background: rgba(26, 21, 24, 0.4); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-window { 
+    position: relative; 
+    background: #ffffff; 
+    border: 1px solid rgba(255,255,255,0.6); 
+    width: 100%; 
+    max-width: 580px; 
+    padding: 50px; 
+    box-shadow: 0 40px 100px rgba(0,0,0,0.08); 
+    z-index: 2; 
+    transform: translateY(30px); 
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+.luxury-modal.active .modal-window { 
+    transform: translateY(0); 
+}
+
+.modal-close-btn { 
+    position: absolute; 
+    top: 25px; right: 30px; 
+    background: none; border: none; 
+    font-size: 32px; 
+    color: var(--text-neutral); 
+    cursor: pointer; 
+}
+
+.modal-pre-title { 
+    font-size: 11px; 
+    color: var(--luxury-muted-gold); 
+    letter-spacing: 3px; 
+    display: block; 
+    margin-bottom: 8px; 
+}
+
+.modal-main-title { 
+    font-family: var(--font-heading); 
+    font-size: 28px; 
+    margin-bottom: 20px; 
+}
+
+.modal-body-text p { 
+    color: var(--text-neutral); 
+    font-size: 15px; 
+    margin-bottom: 30px; 
+}
+
+.inside-title { 
+    font-size: 13px; 
+    font-weight: 600; text-transform: uppercase; 
+    margin-bottom: 15px; 
+}
+
+.modal-features-list { 
+    list-style: none; 
+    margin-bottom: 40px; 
+}
+
+.modal-features-list li { 
+    font-size: 14px; 
+    margin-bottom: 10px; 
+    padding-left: 20px; 
+    position: relative; 
+}
+
+.modal-features-list li::before { 
+    content: '—'; 
+    position: absolute; left: 0; 
+    color: var(--luxury-dusty-rose); 
+}
+
+/* Всплывающий снизу баннер согласия на Cookies */
+.cookie-consent-banner { 
+    position: fixed; 
+    bottom: -120px; 
+    left: 0; width: 100%; 
+    background: rgba(255, 255, 255, 0.94); 
+    border-top: 1px solid var(--border-invisible); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    padding: 20px 0; 
+    z-index: 9999; 
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.03); 
+    transition: bottom 0.5s ease-in-out; 
+}
+
+.cookie-consent-banner.show { 
+    bottom: 0; 
+}
+
+.cookie-container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 24px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 30px; 
+}
+
+.cookie-text { 
+    font-size: 13px; 
+    color: var(--text-neutral); 
+    line-height: 1.5; 
+}
+
+.cookie-text a { 
+    color: var(--luxury-dusty-rose); 
+    text-decoration: underline; 
+}
+
+.cookie-accept-btn { 
+    background: var(--luxury-deep-charcoal); 
+    color: #fff; 
+    border: none; 
+    padding: 11px 35px; 
+    font-weight: 600; 
+    font-size: 13px; 
+    cursor: pointer; 
+    border-radius: 50px; 
+    transition: opacity 0.2s; 
+}
+
+.cookie-accept-btn:hover { 
+    opacity: 0.9; 
+}
+
+/* Подвал */
+.footer { 
+    padding: 60px 0; 
+    text-align: center; 
+    border-top: 1px solid var(--border-invisible); 
+    background: #ffffff; 
+}
+
+.footer-legal-links { 
+    display: flex; 
+    justify-content: center; 
+    gap: 25px; 
+    margin-bottom: 20px; 
+    flex-wrap: wrap; 
+}
+
+.legal-link { 
+    font-size: 12px; 
+    color: var(--text-neutral); 
+    text-decoration: none; 
+}
+
+.legal-link:hover { 
+    color: var(--luxury-dusty-rose); 
+    text-decoration: underline; 
+}
+
+.copyright-text {
+    font-size: 12px;
+    color: var(--text-neutral);
+}
+
+/* ==========================================================================
+   📱 9. ПОЛНАЯ МОБИЛЬНАЯ АДАПТИВНОСТЬ КЛИЕНТСКИХ ИНТЕРФЕЙСОВ
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .hero-premium-banner { 
+        height: auto; 
+        padding: 70px 0; 
+    }
+    .hero-banner__wrapper, .prices-grid, .contacts-grid-layout, .cookie-container { 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+    }
+    .banner-silk-overlay, .hero-banner__visual { 
+        display: none; 
+    }
+    .luxury-title-frame { 
+        border-left: none; 
+        border-top: 2px solid var(--luxury-dusty-rose); 
+        padding-left: 0; 
+        padding-top: 15px; 
+        display: inline-block; 
+    }
+    .products-grid-five, .reviews-main-grid, .catalog-grid-full, .reviews-wall-grid { 
+        grid-template-columns: repeat(2, 1fr) !important; 
+    }
+    .products-grid-four {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px 16px !important;
+    }
+    .capsule-lens {
+        height: 220px; 
+    }
+    .text-muted-legal {
+        border-left: none;
+        border-top: 1px solid var(--border-invisible);
+        padding-left: 0;
+        padding-top: 30px;
+    }
+    .cookie-container { 
+        gap: 15px; 
+    }
+    .cookie-accept-btn { 
+        width: 100%; 
+    }
+    .btn-nav { 
+        display: block; 
+        margin: 15px auto 0 auto; 
+        width: fit-content; 
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid-five, .products-grid-four, .reviews-main-grid, .catalog-grid-full, .reviews-wall-grid { 
+        grid-template-columns: 1fr !important; 
+        gap: 25px !important;
+    }
+    .capsule-lens {
+        height: 260px; 
+    }
+    .modal-window { 
+        padding: 30px 20px; 
+        width: 92%; 
+    }
+}
+/* ==========================================================================
+   📱 ФИНАЛЬНЫЙ АДАПТИВНЫЙ БЛОК ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ И ТАЧ-ЭКРАНОВ
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Планшеты и небольшие ноутбуки (Ширина экрана до 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    /* Сужаем сетку из 14 услуг до 3 колонок, чтобы карточки оставались крупными */
+    .products-grid-four {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 25px 20px !important;
+    }
+    
+    /* Сжимаем главную сетку до 3 колонок */
+    .products-grid-five {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 20px 15px !important;
+    }
+    
+    .hero-premium-banner {
+        height: auto;
+        padding: 100px 0 60px 0;
+    }
+    
+    .luxury-main-title {
+        font-size: 44px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Вертикальные планшеты и большие смартфоны (Ширина экрана до 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    /* Перестраиваем шапку навигации в вертикальный стек */
+    .header__wrapper {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 15px;
+    }
+    
+    .nav__link {
+        margin: 0;
+        font-size: 13px;
+    }
+    
+    .btn-nav {
+        width: 100%;
+        max-width: 280px;
+        padding: 10px 20px;
+    }
+    
+    /* Перестраиваем главный баннер в один вертикальный блок */
+    .hero-banner__wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    /* Отключаем декоративный скос на мобильных, чтобы освободить место */
+    .banner-silk-overlay, 
+    .hero-banner__visual {
+        display: none !important;
+    }
+    
+    .luxury-title-frame {
+        border-left: none;
+        border-top: 2px solid var(--luxury-dusty-rose);
+        padding-left: 0;
+        padding-top: 20px;
+        margin: 0 auto 30px auto;
+        display: inline-block;
+    }
+    
+    .luxury-main-title {
+        font-size: 36px;
+    }
+    
+    .premium-subtitle {
+        font-size: 16px;
+        letter-spacing: 3px;
+    }
+    
+    /* Все сетки переводим строго в 2 колонки */
+    .products-grid-four,
+    .products-grid-five,
+    .reviews-main-grid,
+    .catalog-grid-full,
+    .reviews-wall-grid,
+    .prices-grid,
+    .contacts-grid-layout {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px 15px !important;
+    }
+    
+    /* Корректируем высоту карточек, чтобы они пропорционально сжимались */
+    .capsule-lens {
+        height: 210px;
+    }
+    
+    /* Юридический блок контактов */
+    .text-muted-legal {
+        border-left: none;
+        border-top: 1px solid var(--border-invisible);
+        padding-left: 0;
+        padding-top: 25px;
+    }
+    
+    /* Адаптируем всплывающий Куки-баннер */
+    .cookie-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .cookie-accept-btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Мобильные телефоны (Ширина экрана до 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    .header {
+        padding: 12px 0;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .luxury-main-title {
+        font-size: 30px;
+    }
+    
+    /* На маленьких смартфонах вытягиваем все карточки в 1 аккуратную колонку */
+    .products-grid-four,
+    .products-grid-five,
+    .reviews-main-grid,
+    .catalog-grid-full,
+    .reviews-wall-grid,
+    .prices-grid,
+    .contacts-grid-layout {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+    }
+    
+    /* На телефонах возвращаем картинкам услуг комфортную крупную высоту */
+    .capsule-lens {
+        height: 250px;
+    }
+    
+    /* Модальное окно на весь экран телефона */
+    .modal-window {
+        padding: 35px 20px;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto; /* Добавляем внутренний скролл, если текст большой */
+    }
+    
+    .modal-main-title {
+        font-size: 22px;
+    }
+    
+    .price-card, 
+    .price-card-item {
+        padding: 35px 25px;
+    }
+}
+/* ==========================================================================
+   💬 КОМПАКТНАЯ ГОР-ЛЕНТА НА 10 ФОТО-ОТЗЫВОВ (КАРУСЕЛЬ)
+   ========================================================================== */
+
+.slider-viewport {
+    width: 100%;
+    overflow: hidden; /* Скрывает картинки, которые не поместились в экран */
+    position: relative;
+    padding: 20px 0;
+}
+
+.slider-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    padding-left: max(24px, calc((100vw - 1200px) / 2)); /* Выравнивание начала ленты по контейнеру */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* Компактный бокс-рамка под скриншот отзыва */
+.slider-capsule {
+    width: 320px; /* Фиксированная аккуратная ширина скриншота */
+    height: 400px; /* Ограничение по высоте, чтобы не занимать много места */
+    background: #ffffff;
+    border: 1px solid rgba(54, 45, 51, 0.05);
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(54, 45, 51, 0.01);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* Настройка самого тега изображения внутри слайдера */
+.slider-img-tag {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Картинка полностью помещается в рамку без обрезки */
+    background-color: #faf6f5; /* Легкая подложка под скриншот */
+}
+
+.slider-capsule:hover {
+    transform: translateY(-4px);
+    border-color: var(--luxury-dusty-rose);
+    box-shadow: 0 15px 35px rgba(54, 45, 51, 0.03);
+}
+
+/* Панель управления */
+.slider-controls-container {
+    margin-top: 30px;
+}
+
+.slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.slider-arrow {
+    background: transparent;
+    border: 1px solid var(--luxury-deep-charcoal);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: var(--luxury-deep-charcoal);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background: var(--luxury-deep-charcoal);
+    color: #ffffff;
+}
+
+.slider-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.slider-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(54, 45, 51, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.slider-dot.active {
+    background: var(--luxury-dusty-rose);
+    transform: scale(1.2);
+}
+
+/* Мобильный адаптив для тач-скринов */
+@media (max-width: 768px) {
+    .slider-capsule {
+        width: 260px; /* Сужаем карточки на телефонах */
+        height: 340px;
+    }
+    .slider-track {
+        padding-left: 20px;
+        /* На телефонах разрешаем стандартный плавный пальцевый скролл */
+        overflow-x: auto; 
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+    .slider-controls-container {
+        display: none; /* Прячем стрелки на смартфонах, там листают пальцем */
+    }
+}
+/* ==========================================================================
+   🔍 СТИЛИ ДЛЯ УВЕЛИЧЕНИЯ ФОТОГРАФИЙ (LIGHTBOX) И МОБИЛЬНОГО СКРОЛЛА
+   ========================================================================== */
+
+/* Настройки полноэкранного оверлея зума */
+.lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(26, 21, 24, 0.92); /* Глубокая темная премиальная вуаль */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999; /* Поверх всех элементов сайта и модалок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Кнопка закрытия увеличенного режима */
+.lightbox-close {
+    position: absolute;
+    top: 30px; right: 40px;
+    background: none; border: none;
+    font-size: 44px;
+    color: #ffffff;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+.lightbox-close:hover { opacity: 1; }
+
+/* Контейнер картинки с защитой от вылезания за экран телефона */
+.lightbox-image-wrapper {
+    max-width: 90%;
+    max-height: 85vh;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lightbox-overlay.active .lightbox-image-wrapper {
+    transform: scale(1);
+}
+
+#lightboxTargetImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Картинка не обрезается и полностью видна */
+    box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+}
+
+/* 📱 ОБНОВЛЕННЫЙ АДАПТИВ МОБИЛЬНОГО СКРОЛЛА И КЛИКОВ */
+@media (max-width: 768px) {
+    .slider-viewport {
+        overflow-x: auto; /* Включаем нативный горизонтальный скролл */
+        -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS (инерция) */
+        scroll-snap-type: x mandatory; /* Мягкое прилипание карточки к краю экрана */
+        padding-bottom: 25px;
+    }
+    
+    /* Убираем полосу прокрутки браузера, чтобы сохранить чистоту дизайна */
+    .slider-viewport::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .slider-track {
+        padding-left: 20px;
+        gap: 16px;
+        transform: none !important; /* Отключаем JS-трансформацию стрелок, чтобы не ломать жесткий пальцевый скролл */
+    }
+    
+    .slider-capsule {
+        width: 270px;
+        height: 360px;
+        scroll-snap-align: start; /* Каждая карточка встает ровно по левому краю при скролле */
+    }
+    
+    .slider-controls-container {
+        display: none; /* Скрываем стрелки на смартфонах */
+    }
+    
+    .lightbox-close {
+        top: 20px; right: 25px;
+        font-size: 38px;
+    }
+}
+/* ==========================================================================
+   💬 КАРУСЕЛЬ И КЛИК ПО ВСЕЙ ОБЛАСТИ КАРТОЧКИ ОТЗЫВА
+   ========================================================================== */
+
+.slider-viewport {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+.slider-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    padding-left: max(24px, calc((100vw - 1200px) / 2));
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* Карточка отзыва как единая интерактивная зона */
+.slider-capsule {
+    width: 320px;
+    height: 400px;
+    background: #ffffff;
+    border: 1px solid rgba(54, 45, 51, 0.05);
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(54, 45, 51, 0.01);
+    cursor: zoom-in; /* Курсор в виде лупы подсказывает, что карточка увеличивается */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.slider-img-tag {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #faf6f5;
+    pointer-events: none; /* Пропускает клик сквозь картинку прямо на карточку-капсулу */
+}
+
+.slider-capsule:hover {
+    transform: translateY(-4px);
+    border-color: var(--luxury-dusty-rose);
+    box-shadow: 0 15px 35px rgba(54, 45, 51, 0.03);
+}
+
+/* Полноэкранный Lightbox (96% экрана смартфона) */
+.lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13, 10, 15, 0.96);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+
+.lightbox-close {
+    position: absolute;
+    top: 20px; right: 25px;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 32px;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-image-wrapper {
+    width: 96%;
+    height: 94%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lightbox-overlay.active .lightbox-image-wrapper { transform: scale(1); }
+
+#lightboxTargetImg {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Мобильный адаптив для жестов */
+@media (max-width: 768px) {
+    .slider-viewport {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 25px;
+    }
+    .slider-viewport::-webkit-scrollbar { display: none; }
+    .slider-track { padding-left: 20px; gap: 16px; transform: none !important; }
+    .slider-capsule { width: 270px; height: 360px; scroll-snap-align: start; }
+    .slider-controls-container { display: none; }
+}
+/* ==========================================================================
+   🔍 ИСПРАВЛЕННЫЕ СТИЛИ ПОЛНОЭКРАННОГО УВЕЛИЧЕНИЯ ОТЗЫВОВ
+   ========================================================================== */
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13, 10, 15, 0.96) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 999999 !important; /* Максимальный приоритет поверх всего */
+    display: none; /* Изначально скрыто */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Класс, который включает отображение на весь экран */
+.lightbox-overlay.active {
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.lightbox-image-wrapper {
+    width: 96%;
+    height: 94%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.97);
+    transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.active .lightbox-image-wrapper {
+    transform: scale(1);
+}
+
+#lightboxTargetImg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px; right: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 32px;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Защита от перекрытия клика внутри карточки */
+.slider-capsule {
+    cursor: zoom-in !important;
+}
+.slider-capsule * {
+    pointer-events: none !important; /* Клик гарантированно поймает сама карточка, а не картинка внутри */
+}
+/* ==========================================================================
+   ⚜️ ПРЕМИУМ-ОФОРМЛЕНИЕ ГЛАВНОГО БАННЕРА (БЬЮТИ-КОЛЛАЖ)
+   ========================================================================== */
+
+.hero-premium-section {
+    position: relative;
+    margin-top: 85px;
+    height: 580px;
+    background: transparent; /* Пропускает сквозь себя мягкий фоновый градиент сайта */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-banner__wrapper {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Идеальное разделение под пропорции баннера */
+    width: 100%;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Левая текстовая часть */
+.luxury-title-frame { 
+    border-left: 3px solid #d65885; /* Розовый лотос */
+    padding-left: 25px; 
+    margin-bottom: 30px; 
+}
+
+.luxury-node { 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: #c2a372; /* Благородное золото */
+    letter-spacing: 4px; 
+    display: block; 
+    margin-bottom: 6px; 
+}
+
+.luxury-main-title { 
+    font-family: 'Cinzel', serif;
+    font-size: 54px; 
+    font-weight: 400; 
+    line-height: 1.1; 
+    color: #362d33; /* Глубокий графит */
+    letter-spacing: -1px;
+}
+
+.premium-subtitle { 
+    font-size: 18px; 
+    font-weight: 400; 
+    letter-spacing: 5px; 
+    color: #362d33; 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+    text-transform: uppercase;
+}
+
+.premium-subtitle span { 
+    font-weight: 600; 
+    color: #d65885; /* Подсвечиваем "Наращивания волос" в тон логотипа */
+}
+
+.btn-banner-prime { 
+    background: #4a3e47; /* Приглушенный черничный оттенок под цвет вашей плашки */
+    color: #fff; 
+    text-decoration: none; 
+    padding: 18px 40px; 
+    font-size: 13px; 
+    font-weight: 600; 
+    letter-spacing: 1.5px; 
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-banner-prime:hover { 
+    background: #d65885;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(214, 88, 133, 0.2);
+}
+
+/* Правая часть: Оформление глянцевого бокса под картинку */
+.hero-premium__visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Мягкое неоновое свечение позади баннера, сглаживающее углы */
+.collage-aura-glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(214, 88, 133, 0.15) 0%, rgba(253, 248, 246, 0) 70%);
+    filter: blur(40px);
+    z-index: 1;
+    top: 10%; right: 10%;
+}
+
+/* Глянцевая премиальная рамка (Glassmorphism) без обрезки краев */
+.collage-glass-frame {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 460px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 14px; /* Безопасный отступ создает эффект паспарту */
+    box-shadow: 0 30px 70px rgba(54, 45, 51, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.collage-main-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Картинка гарантированно не обрезается по бокам */
+    display: block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+/* Интерактивный эффект наклона при наведении */
+.hero-premium-section:hover .collage-glass-frame {
+    transform: translateY(-5px) scale(1.01);
+    border-color: rgba(214, 88, 133, 0.3);
+}
+
+/* ==========================================================================
+   📱 МОБИЛЬНАЯ АДАТАЦИЯ ДЛЯ СМАРТФОНОВ
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .hero-premium-section {
+        height: auto;
+        padding: 100px 0 60px 0;
+    }
+    .hero-banner__wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .hero-premium__visual {
+        margin-top: 40px;
+    }
+    .luxury-title-frame {
+        border-left: none;
+        border-top: 2px solid #d65885;
+        padding-left: 0;
+        padding-top: 20px;
+        display: inline-block;
+    }
+    .luxury-main-title {
+        font-size: 38px;
+    }
+    .collage-glass-frame {
+        margin: 0 auto;
+        max-width: 380px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .luxury-main-title {
+        font-size: 32px;
+    }
+    .premium-subtitle {
+        font-size: 15px;
+        letter-spacing: 3px;
+    }
+    .collage-glass-frame {
+        max-width: 100%;
+    }
+}
+/* ==========================================================================
+   📱 АДАПТИВ ДЛЯ ТЕЛЕФОНОВ: КАРТИНКА ВСЕГДА ОСТАЕТСЯ СБОКУ (СПРАВА)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .hero-premium-section {
+        height: auto;
+        padding: 110px 0 50px 0; /* Оптимальные отступы сверху под мобильную шапку */
+    }
+
+    /* Жестко фиксируем отображение в две колонки (текст слева, баннер справа) */
+    .hero-banner__wrapper {
+        grid-template-columns: 1.1fr 0.9fr !important; 
+        gap: 15px !important;
+        align-items: center;
+    }
+
+    /* Адаптируем левую текстовую часть */
+    .luxury-title-frame {
+        border-left: 2px solid #d65885;
+        padding-left: 12px;
+        margin-bottom: 15px;
+    }
+
+    .luxury-main-title {
+        font-size: 24px; /* Аккуратный премиальный размер заголовка на смартфонах */
+        line-height: 1.2;
+    }
+
+    .premium-subtitle {
+        font-size: 11px; /* Сжимаем подзаголовок, чтобы он не ломал строку */
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    /* Компактная кнопка под тач-скрины */
+    .btn-banner-prime {
+        padding: 12px 24px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    /* Адаптируем правую визуальную часть, чтобы картинка стояла аккуратно сбоку */
+    .hero-premium__visual {
+        margin-top: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .collage-glass-frame {
+        padding: 6px; /* Минимальный изящный отступ-рамка на телефонах */
+        max-width: 100%;
+        width: 100%;
+        box-shadow: 0 15px 35px rgba(54, 45, 51, 0.02);
+    }
+
+    /* Свечение на фоне делаем более компактным */
+    .collage-aura-glow {
+        width: 150px;
+        height: 150px;
+        top: 20%; right: 5%;
+    }
+}
+
+/* Экстремально маленькие экраны смартфонов (до 480px) */
+@media (max-width: 480px) {
+    .hero-banner__wrapper {
+        grid-template-columns: 1.05fr 0.95fr !important; /* Ювелирный баланс долей на узких дисплеях */
+        gap: 10px !important;
+    }
+
+    .luxury-main-title {
+        font-size: 18px; /* Шрифт сжимается, исключая наложение элементов */
+    }
+
+    .premium-subtitle {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+    .btn-banner-prime {
+        padding: 10px 16px;
+        font-size: 9px;
+        max-width: 100%; /* Кнопка растягивается на всю доступную ширину левой колонки */
+    }
+
+    .collage-glass-frame {
+        padding: 4px;
+    }
+}
+/* ==========================================================================
+   ⚜️ ПРЕМИУМ-ОФОРМЛЕНИЕ ГЛАВНОГО БАННЕРА (КАРТИНКА СБОКУ БЕЗ ОБРЕЗАНИЙ)
+   ========================================================================== */
+
+.hero-premium-section {
+    position: relative;
+    margin-top: 85px;
+    height: 560px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Двухколоночная сетка: Текст строго слева, картинка строго справа */
+.hero-banner__wrapper {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    width: 100%;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Левая текстовая часть */
+.luxury-title-frame { 
+    border-left: 3px solid #d65885; /* Розовый лотос */
+    padding-left: 25px; 
+    margin-bottom: 30px; 
+}
+
+.luxury-node { 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: #c2a372; /* Золото */
+    letter-spacing: 4px; 
+    display: block; 
+    margin-bottom: 6px; 
+}
+
+.luxury-main-title { 
+    font-family: 'Cinzel', serif;
+    font-size: 54px; 
+    font-weight: 400; 
+    line-height: 1.1; 
+    color: #362d33; 
+    letter-spacing: -1px;
+}
+
+.premium-subtitle { 
+    font-size: 18px; 
+    font-weight: 400; 
+    letter-spacing: 5px; 
+    color: #362d33; 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+    text-transform: uppercase;
+}
+
+.premium-subtitle span { 
+    font-weight: 600; 
+    color: #d65885; 
+}
+
+.btn-banner-prime { 
+    background: #4a3e47; /* Фирменный черничный под цвет плашки */
+    color: #fff; 
+    text-decoration: none; 
+    padding: 18px 40px; 
+    font-size: 13px; 
+    font-weight: 600; 
+    letter-spacing: 1.5px; 
+    display: inline-block;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn-banner-prime:hover { 
+    background: #d65885;
+    transform: translateY(-2px);
+}
+
+/* Правая визуальная часть: Чистый вывод изображения */
+.hero-premium__visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-pure-img {
+    width: 100%;
+    max-width: 460px; /* Ограничиваем максимальную ширину для сохранения пропорций */
+    height: auto;
+    object-fit: contain; /* Картинка никогда не будет обрезана по краям */
+    display: block;
+}
+
+/* ==========================================================================
+   📱 УЛЬТАТИВНЫЙ АДАПТИВ: КАРТИНКА ВСЕГДА СБОКУ НА ЛЮБЫХ ТЕЛЕФОНАХ
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .hero-premium-section {
+        height: auto;
+        padding: 110px 0 50px 0;
+    }
+
+    /* Запрещаем сброс колонки вниз на смартфонах */
+    .hero-banner__wrapper {
+        grid-template-columns: 1.1fr 0.9fr !important; 
+        gap: 15px !important;
+    }
+
+    .luxury-title-frame {
+        border-left: 2px solid #d65885;
+        padding-left: 12px;
+        margin-bottom: 15px;
+    }
+
+    .luxury-main-title {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .premium-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    .btn-banner-prime {
+        padding: 12px 24px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    .hero-pure-img {
+        max-width: 100%;
+    }
+}
+
+/* Крошечные дисплеи смартфонов */
+@media (max-width: 480px) {
+    .hero-banner__wrapper {
+        grid-template-columns: 1.05fr 0.95fr !important;
+        gap: 10px !important;
+    }
+
+    .luxury-main-title {
+        font-size: 18px;
+    }
+
+    .premium-subtitle {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+    .btn-banner-prime {
+        padding: 10px 16px;
+        font-size: 9px;
+        max-width: 100%;
+    }
+}
+/* ==========================================================================
+   ⚜️ ОФОРМЛЕНИЕ БАННЕРА В ИНТЕРЕСНУЮ ФОРМУ ЛЕПЕСТКА ЛОТОСА
+   ========================================================================== */
+
+.hero-premium-section {
+    position: relative;
+    margin-top: 85px;
+    height: 560px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-banner__wrapper {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    width: 100%;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Левая текстовая часть */
+.luxury-title-frame { 
+    border-left: 3px solid #d65885; 
+    padding-left: 25px; 
+    margin-bottom: 30px; 
+}
+
+.luxury-node { 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: #c2a372; 
+    letter-spacing: 4px; 
+    display: block; 
+    margin-bottom: 6px; 
+}
+
+.luxury-main-title { 
+    font-family: 'Cinzel', serif;
+    font-size: 54px; 
+    font-weight: 400; 
+    line-height: 1.1; 
+    color: #362d33; 
+    letter-spacing: -1px;
+}
+
+.premium-subtitle { 
+    font-size: 18px; 
+    font-weight: 400; 
+    letter-spacing: 5px; 
+    color: #362d33; 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+    text-transform: uppercase;
+}
+
+.premium-subtitle span { 
+    font-weight: 600; 
+    color: #d65885; 
+}
+
+.btn-banner-prime { 
+    background: #4a3e47; 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 18px 40px; 
+    font-size: 13px; 
+    font-weight: 600; 
+    letter-spacing: 1.5px; 
+    display: inline-block;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn-banner-prime:hover { 
+    background: #d65885;
+    transform: translateY(-2px);
+}
+
+/* Правая визуальная часть: Живой лепесток-капля */
+.hero-premium__visual {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Нежная подложка-свечение */
+.liquid-shape-aura {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(214, 88, 133, 0.15) 0%, rgba(253, 248, 246, 0) 70%);
+    filter: blur(35px);
+    z-index: 1;
+}
+
+/* Маска асимметричной капли с непрерывной плавной микро-мутацией краев */
+.liquid-mask-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    height: 380px;
+    /* Исходный срез формы */
+    border-radius: 40% 60% 45% 55% / 40% 40% 60% 60%;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(54, 45, 51, 0.05);
+    background-color: #ffffff;
+    will-change: border-radius;
+    /* Плавное колыхание краев */
+    animation: liquidMorph 10s infinite ease-in-out;
+    transition: transform 0.4s ease;
+}
+
+.hero-liquid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняет живой контур без пустот по краям */
+    object-position: center center;
+    transform: scale(1.01);
+    transition: transform 0.5s ease;
+}
+
+/* Интерактивный отклик при наведении курсора */
+.hero-premium-section:hover .liquid-mask-container {
+    transform: translateY(-4px) rotate(1deg);
+}
+.hero-premium-section:hover .hero-liquid-img {
+    transform: scale(1.04);
+}
+
+/* Расчет траектории для бьюти-колыхания маски */
+@keyframes liquidMorph {
+    0%, 100% {
+        border-radius: 40% 60% 45% 55% / 40% 40% 60% 60%;
+    }
+    33% {
+        border-radius: 55% 45% 60% 40% / 45% 55% 45% 55%;
+    }
+    66% {
+        border-radius: 45% 55% 40% 60% / 55% 40% 60% 40%;
+    }
+}
+
+/* ==========================================================================
+   📱 УЛЬТРА-АДАПТИВ: СОХРАНЯЕМ ФОРМУ СБОКУ НА ТЕЛЕФОНАХ
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .hero-premium-section {
+        height: auto;
+        padding: 110px 0 50px 0;
+    }
+
+    .hero-banner__wrapper {
+        grid-template-columns: 1.1fr 0.9fr !important; 
+        gap: 15px !important;
+    }
+
+    .luxury-title-frame {
+        border-left: 2px solid #d65885;
+        padding-left: 12px;
+        margin-bottom: 15px;
+    }
+
+    .luxury-main-title {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .premium-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    .btn-banner-prime {
+        padding: 12px 24px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    .liquid-mask-container {
+        height: 260px; /* Адаптивная высота под экраны планшетов */
+    }
+    .liquid-shape-aura {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-banner__wrapper {
+        grid-template-columns: 1.05fr 0.95fr !important;
+        gap: 10px !important;
+    }
+
+    .luxury-main-title {
+        font-size: 18px;
+    }
+
+    .premium-subtitle {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+    .btn-banner-prime {
+        padding: 10px 16px;
+        font-size: 9px;
+        max-width: 100%;
+    }
+
+    .liquid-mask-container {
+        height: 180px; /* Компактная капля сбоку от текста для мобильных телефонов */
+    }
+}
+/* ==========================================================================
+   🌸 СТИЛИ КНОПКИ СВЯЗИ С САНДРОЙ ЛОТОС В МОДАЛЬНОМ ОКНЕ
+   ========================================================================== */
+
+.modal-contact-lotos-zone {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.btn-contact-lotos {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 1px solid var(--luxury-dusty-rose); /* Контур фирменного цвета розы */
+    color: var(--luxury-dusty-rose);
+    padding: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-contact-lotos:hover {
+    background: var(--luxury-dusty-rose); /* Заливка при наведении */
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(214, 88, 133, 0.15);
+}
+/* ==========================================================================
+   🏛️ КОРРЕКТИРОВКА ОТОБРАЖЕНИЯ ФИКСИРОВАННЫХ ОВЕРЛЕЕВ (LIGHTBOX)
+   ========================================================================== */
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13, 10, 15, 0.97) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 999999 !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+/* ==========================================================================
+   🔗 СИНХРОНИЗАЦИЯ ТЕГОВ ССЫЛОК ПОД ФОРМАТ КНОПОК ВК
+   ========================================================================== */
+
+.btn-pay-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
+}
+/* ==========================================================================
+   🎯 ПРЕМИУМ-СТИЛИЗАЦИЯ СЕКЦИИ "ДЛЯ КОГО КУРС" (QUIET LUXURY)
+   ========================================================================== */
+
+.target-section {
+    padding: 100px 0;
+    background: transparent; /* Мягко пропускает сквозь себя шелковый аврора-градиент */
+    position: relative;
+    border-top: 1px solid var(--border-invisible);
+}
+
+/* Сетка на 2 колонки и 2 ряда для идеального баланса на экране */
+.target-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 30px;
+    margin-top: 50px;
+}
+
+/* Индивидуальная бьюти-карта целевой группы */
+.target-card-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    background: #ffffff; /* Белая подложка изолирует карту от фона сайта */
+    border: 1px solid rgba(54, 45, 51, 0.05);
+    padding: 40px 35px;
+    box-shadow: 0 4px 30px rgba(54, 45, 51, 0.01);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+}
+
+/* Элегантные крупные цифровые маркеры этапов вместо грубых иконок */
+.target-card-icon {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--luxury-muted-gold);
+    line-height: 1;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.target-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Утонченные дорогие заголовки карточек */
+.target-card-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--luxury-deep-charcoal);
+    letter-spacing: 0.2px;
+}
+
+/* Аккуратное, сдержанное подчеркивание акцентов (вместо сплошной заливки маркером на фото) */
+.target-card-title .highlight-rose {
+    color: var(--luxury-dusty-rose);
+    font-weight: 700;
+}
+
+.target-card-title .highlight-gold {
+    color: var(--luxury-muted-gold);
+    font-weight: 700;
+}
+
+.target-card-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-neutral);
+    font-weight: 400;
+}
+
+/* Интерактивный бьюти-отклик карт при наведении */
+.target-card-node:hover {
+    border-color: var(--luxury-dusty-rose);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(54, 45, 51, 0.03);
+}
+
+.target-card-node:hover .target-card-icon {
+    color: var(--luxury-dusty-rose);
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   📱 МОБИЛЬНАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ И ТАЧ-ЭКРАНОВ
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .target-section {
+        padding: 70px 0;
+    }
+    .target-cards-grid {
+        grid-template-columns: 1fr !important; /* На телефонах перестраиваем в одну аккуратную ленту */
+        gap: 20px !important;
+        margin-top: 40px;
+    }
+    .target-card-node {
+        padding: 30px 25px;
+        gap: 16px;
+    }
+    .target-card-icon {
+        font-size: 26px;
+    }
+    .target-card-title {
+        font-size: 16px;
+    }
+    .target-card-text {
+        font-size: 13px;
+    }
+}
+/* ==========================================================================
+   💳 РОСКОШНАЯ ДВУХУРОВНЕВАЯ МАТРИЦА ТАРИФОВ (LIGHT & PRO LUXURY)
+   ========================================================================== */
+
+.prices-section {
+    padding: 120px 0;
+    background: transparent;
+    border-top: 1px solid var(--border-invisible);
+}
+
+.prices-luxury-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+/* Базовый каркас карточки тарифа */
+.price-luxury-card {
+    position: relative;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 380px;
+    box-shadow: 0 10px 40px rgba(54, 45, 51, 0.02);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+}
+
+/* --- СТИЛЬ КАРТОЧЕК СТАРТ (СВЕТЛЫЙ КРЕМОН) --- */
+.card--start {
+    background: #ffffff;
+    border: 1px solid rgba(214, 88, 133, 0.15); /* Деликатный кант цвета розы */
+}
+.card--start h3 {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--luxury-deep-charcoal);
+    margin-top: 10px;
+}
+.card--start .card-luxury-value {
+    color: var(--text-graphite);
+}
+
+/* --- СТИЛЬ КАРТОЧЕК PRO (ЛЮКС ГРАФИТ И ЗОЛОТО) --- */
+.card--pro {
+    background: #251e2b; /* Глубокий благородный темный тон */
+    border: 1px solid rgba(194, 163, 114, 0.3); /* Золотое матовое тиснение */
+}
+.card--pro h3 {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #ffffff; /* Белоснежный текст на темном */
+    margin-top: 10px;
+}
+.card--pro .card-luxury-value {
+    color: var(--luxury-muted-gold); /* Цены светятся мягким золотом */
+}
+
+/* Мягкое внутреннее свечение PRO-карт */
+.card-luxury-glow {
+    position: absolute;
+    top: -20%; right: -20%;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(194, 163, 114, 0.08) 0%, rgba(0,0,0,0) 70%);
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+/* Детали заголовков */
+.card-luxury-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.luxury-badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    padding: 6px 14px;
+}
+.badge--rose { background: #fdf2f5; color: var(--luxury-dusty-rose); }
+.badge--gold { background: rgba(194, 163, 114, 0.1); color: var(--luxury-muted-gold); }
+
+/* Вывод цены */
+.card-luxury-value {
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 500;
+    margin: 35px 0 25px 0;
+    line-height: 1;
+}
+.card-luxury-value .currency {
+    font-size: 26px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.card-luxury-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(54, 45, 51, 0.05);
+    margin-bottom: 30px;
+}
+.card--pro .card-luxury-divider {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ⚡ ОБНОВЛЕННЫЕ ПРЕМИУМ-КНОПКИ ДЕЙСТВИЯ */
+.btn-luxury-action {
+    padding: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 0px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Кнопка для старта (розовая заливка) */
+.action--rose {
+    background: var(--luxury-deep-charcoal);
+    color: #ffffff;
+    border: 1px solid var(--luxury-deep-charcoal);
+}
+.action--rose:hover {
+    background: var(--luxury-dusty-rose);
+    border-color: var(--luxury-dusty-rose);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(214, 88, 133, 0.2);
+}
+
+/* Кнопка для PRO (золотая матовая заливка) */
+.action--gold {
+    background: var(--luxury-muted-gold);
+    color: #251e2b;
+    border: 1px solid var(--luxury-muted-gold);
+}
+.action--gold:hover {
+    background: transparent;
+    color: var(--luxury-muted-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(194, 163, 114, 0.15);
+}
+
+/* Эффекты наведения на сами боксы */
+.price-luxury-card:hover {
+    transform: translateY(-5px);
+}
+.card--start:hover {
+    border-color: var(--luxury-dusty-rose);
+    box-shadow: 0 25px 50px rgba(214, 88, 133, 0.04);
+}
+.card--pro:hover {
+    border-color: var(--luxury-muted-gold);
+    box-shadow: 0 25px 50px rgba(194, 163, 114, 0.06);
+}
+
+/* ==========================================================================
+   📱 МОБИЛЬНАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .prices-luxury-grid {
+        grid-template-columns: 1fr !important; /* Вытягиваем в одну ленту на телефонах */
+        gap: 25px !important;
+    }
+    .price-luxury-card {
+        padding: 40px 30px;
+        min-height: auto;
+    }
+    .card-luxury-value {
+        font-size: 42px;
+        margin: 25px 0 20px 0;
+    }
+}
